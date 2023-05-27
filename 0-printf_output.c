@@ -1,5 +1,17 @@
 #include "main.h"
 #include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
+/**
+ * _putchar - print character to the standard output
+ * @c: preffered character to print
+ *
+ * Return: 1 On success, -1 on error
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
 
 /**
   * _printf - function that produces output according to a format
@@ -18,28 +30,31 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format ++;
+			format++;
 
 			switch (*format)
 			{
 				case 'c':
 					char_print += _putchar(va_arg(l, int));
+
 					break;
 				case 'b':
-				{
+
 					char *p = va_arg(l, char*);
 						int k = 0;
 
 						while (p[k])
-						{
+
 							char_print += _putchar(p[k]);
 							k++;
-						}
-				}
+
+
 				break;
 
 				case '%':
+
 				char_print += _putchar('%');
+
 				break;
 				default:
 				_putchar(*format);
@@ -52,8 +67,9 @@ int _printf(const char *format, ...)
 		{
 			char_print += _putchar(*format);
 		}
-		format ++;
-	}
+		format++;
+	}[
 	va_end(l);
-	return char_print;
+
+	return (char_print);
 }
