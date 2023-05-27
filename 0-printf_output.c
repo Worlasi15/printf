@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
+
 /**
  * _putchar - print character to the standard output
  * @c: preffered character to print
@@ -11,6 +12,17 @@
 int _putchar(char c)
 {
 	return (write(1, &c, 1));
+}
+
+/**
+  * print_char - function that prints out character
+  * @args: arguments that is in var_list
+  * char_print: the pointer to all characters printed in total
+  */
+void print_char(var_list args, int *char_print)
+{
+	char i = var_args(args, int);
+	*char_print += _putchar
 }
 
 /**
@@ -26,50 +38,37 @@ int _printf(const char *format, ...)
 
 	va_start(l, format);
 
-	while (*format)
+	while (*format != '\0')
 	{
-		if (*format == '%')
-		{
-			format++;
-
-			switch (*format)
+		switch (*format)
 			{
 				case 'c':
-					char_print += _putchar(va_arg(l, int));
-
-					break;
+					{
+						char_print += _putchar(va_arg(l, int));
+						break;
 				case 'b':
 
 					char *p = va_arg(l, char*);
 						int k = 0;
 
-						while (p[k])
-
+				while (p[k])
 							char_print += _putchar(p[k]);
-							k++;
-
-
-				break;
-
-				case '%':
-
-				char_print += _putchar('%');
-
-				break;
+						k++;
+						break;
+						case '%':
+						char_print += _putchar('%');
+						break;
 				default:
-				_putchar(*format);
-				_putchar('%');
-					char_print += 2;
-				break;
+						{
+					       _putchar(*format);
+					       _putchar('%');
+					       char_print += 2;
+					       break;
+						}
+					}
+					format++;
 			}
-		}
-		else
-		{
-			char_print += _putchar(*format);
-		}
-		format++;
-	}[
-	va_end(l);
-
-	return (char_print);
+		va_end(args);
+		return (char_print);
+	}
 }
