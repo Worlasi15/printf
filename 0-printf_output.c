@@ -1,4 +1,7 @@
 #include "main.h"
+
+int _printf(const char *format, ...);
+
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -19,10 +22,11 @@ int _putchar(char c)
   * @args: arguments that is in var_list
   * char_print: the pointer to all characters printed in total
   */
-void print_char(var_list args, int *char_print)
+void print_char(va_list arg, int *char_print)
 {
-	char i = var_args(args, int);
-	char_print += _putchar
+	char i = var_arg(arg, int);
+
+	int (*)(char);
 }
 
 /**
@@ -35,6 +39,7 @@ int _printf(const char *format, ...)
 {
 	va_list l;
 	int char_print = 0;
+
 	va_start(l, format);
 	while (*format != '\0')
 	{
@@ -52,7 +57,7 @@ int _printf(const char *format, ...)
 							char *p = va_arg(l, char*);
 							int k = 0;
 
-							while (p[k])
+			                        	while (p[k])
 								char_print += _putchar(p[k]);
 							k++;
 							break;
@@ -61,23 +66,26 @@ int _printf(const char *format, ...)
 							break;
 							default:
 							{
-								_putchar(*format)
-									_putchar('%')
+								_putchar(*format);
+									_putchar('%');
 									char_print += 2;
 								break;
 							}
 						}
-						format++
+						format++;
 				}
-			else
+			else;
 			{
 				char_print += _putchar(*format);
+				{
+					format++;
+				}
+				va_end(l);
+
+				return (char_print);
+
+				va_end(arg);
+
+				return (char_print);
 			}
-			format++;
-		}
-		va_end(l);
-		return (char_print);
-		va_end(args);
-		return (char_print);
-	}
 }
