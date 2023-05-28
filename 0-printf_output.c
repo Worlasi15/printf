@@ -14,6 +14,30 @@ int _putchar(char c)
 	return (write(1, &c, 1));
 }
 
+/**
+ * print_char - function that prints out character
+ * @args: arguments that is in var_list
+ * char_print - the pointer to all characters printed in total
+ */
+int print_char(va_list l)
+{
+    int char_print = 0;
+    char_print += _putchar(va_arg(l, int));
+    return char_print;
+}
+
+int print_string(va_list l)
+{
+    int char_print = 0;
+    char *p = va_arg(l, char*);
+    int k = 0;
+    while (p[k])
+    {
+        char_print += _putchar(p[k]);
+        k++;
+    }
+    return char_print;
+}
 
 /**
   * _printf - function that produces output according to a format
