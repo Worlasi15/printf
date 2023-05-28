@@ -62,21 +62,17 @@ int _printf(const char *format, ...)
 								break;
 							}
 						}
-						format++;
 				}
-		}else
-			{
-				char_print += _putchar(*format);
-				{
+		}
+		else
+		{
+			char_print += _putchar(*format);
+		}
 					format++;
-				}
-				va_end(l);
+		}
+		va_end(l);
 
-				return (char_print);
-
-				va_end(l);
-
-				return (char_print);
-			}
+		return (char_print);
 	}
-}
+
+
