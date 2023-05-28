@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format ++;
+			format++;
 
 			switch (*format)
 			{
@@ -52,8 +52,8 @@ int _printf(const char *format, ...)
 		{
 			char_print += _putchar(*format);
 		}
-		format ++;
+		format++;
 	}
 	va_end(l);
-	return char_print;
+	return (char_print);
 }
