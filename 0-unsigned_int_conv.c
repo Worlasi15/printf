@@ -22,7 +22,7 @@ int _putchar(char c)
   */
 int _printf(const char *format, ...)
 {
-	va_list args;
+	va_list l;
 
 	va_start(l, format);
 
