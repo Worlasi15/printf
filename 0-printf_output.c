@@ -17,17 +17,6 @@ int _putchar(char c)
 	return (write(1, &c, 1));
 }
 
-/**
-  * print_char - function that prints out character
-  * @args: arguments that is in var_list
-  * char_print: the pointer to all characters printed in total
-  */
-void print_char(va_list arg, int *char_print)
-{
-	char i = var_arg(arg, int);
-
-	int (*)(char);
-}
 
 /**
   * _printf - function that produces output according to a format
@@ -47,23 +36,27 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			switch (*format)
-				switch (*format)
 				{
 					case 'c':
 						{
 							char_print += _putchar(va_arg(l, int));
 							break;
-							case 'b':
-							char *p = va_arg(l, char*);
+						}
+					case 'b':
+						{
 							int k = 0;
-
-			                        	while (p[k])
-								char_print += _putchar(p[k]);
-							k++;
-							break;
+							char *p = va_arg(l, char*);
+					while (p[k])
+					{
+						char_print += _putchar(p[k]);
+						k++;
+								break;
+					}
 							case '%':
-							char_print += _putchar('%');
-							break;
+							{
+								char_print += _putchar('%');
+								break;
+							}
 							default:
 							{
 								_putchar(*format);
@@ -74,7 +67,7 @@ int _printf(const char *format, ...)
 						}
 						format++;
 				}
-			else;
+		}else
 			{
 				char_print += _putchar(*format);
 				{
@@ -84,8 +77,9 @@ int _printf(const char *format, ...)
 
 				return (char_print);
 
-				va_end(arg);
+				va_end(l);
 
 				return (char_print);
 			}
+	}
 }
