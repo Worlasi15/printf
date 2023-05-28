@@ -1,14 +1,13 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "main.h"
+
 #include <unistd.h>
 #include <stdio.h>
-
 /**
  * _putchar - print character to the standard output
  * @c: preffered character to print
- *
- * Return: 1 On success, -1 on error
+ ** Return: 1 On success, -1 on error
  */
 int _putchar(char c)
 {
@@ -17,13 +16,13 @@ int _putchar(char c)
 
 /**
   * _printf - function that produces output according to a format
-  * @format: arguments that is in var_list
-  * Return: the number of characters printed
+  * @format: a character string
+  * Return:  number of characters printed
   * excluding the null byte used to end output to strings
   */
 int _printf(const char *format, ...)
 {
-	va_list l;
+	va_list args;
 
 	va_start(l, format);
 
@@ -31,41 +30,26 @@ int _printf(const char *format, ...)
 
 	while (*format)
 	{
+
 		if (*format == '%')
 		{
 			format++;
 
-			switch (*format)
+			if (*format == 'b')
 			{
-				case 'c':
-					{
+				unsigned int par = va_arg(l, unsigned int);
+				int bit_count = sizeof(par) * 8;
 
-						char c = (char)va_arg(l, int);
+				for (int i = bit_count - 1; i >= 0; i--)
+				{
 
-						char_print += _putchar(c);
-						break;
-					}
-				case 's':
-					{
-
-						char *str = va_arg(l, char *);
-
-				while (*str)
-						{
-							char_print += _putchar(*str);
-							str++;
-						}
-						break;
-					}
-				case '%':
-					{
-						char_print += _putchar('%');
-						break;
-					}
-				default:
-					char_print += _putchar('%');
-					char_print += _putchar(*format);
-					break;
+					char_print += _putchar((par & (1 << i)) ? '1' : '0');
+				}
+			}
+			else
+			{
+				char_print += _putchar('%');
+				char_print += _putchar(*format);
 			}
 		}
 		else
@@ -77,6 +61,6 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(l);
-
 	return (char_print);
 }
+
