@@ -1,102 +1,71 @@
 #include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <stdarg.h>
 
-/**
- * _putchar - print character to the standard output
- * @c: preffered character to print
- *
- * Return: 1 On success, -1 on error
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
- * print_char - function that prints out character
- * @args: arguments that is in var_list
- * char_print - the pointer to all characters printed in total
- */
-int print_char(va_list l)
-{
-    int char_print = 0;
-    char_print += _putchar(va_arg(l, int));
-    return char_print;
-}
-
-int print_string(va_list l)
-{
-    int char_print = 0;
-    char *p = va_arg(l, char*);
-    int k = 0;
-    while (p[k])
-    {
-        char_print += _putchar(p[k]);
-        k++;
-    }
-    return char_print;
-}
-
+void print_buffer(char buffer, int *B_I);
 /**
   * _printf - function that produces output according to a format
-  * @format: a character string
+  * @format:  a character string
   * Return: number of characters printed
   * excluding the null byte used to end output to strings
   */
 int _printf(const char *format, ...)
 {
-	va_list l;
-	int char_print = 0;
+	int k = 0;
+	printed = 0;
+	char_print = 0;
+	int flag = 0;
+	int width = 0;
+	int precision = 0;
+	int size = 0;
+	int B_I = 0;
+	va_list par;
+	char buffer [BUFF_SIZE];
 
-	va_start(l, format);
-	while (*format != '\0')
+
+	if (format ==NULL)
+		return (-1);
+
+	va_start(par, format);
+
+	for (i = 0; format && format[k] != '\0'; k++)
 	{
-		if (*format == '%')
+		if (format[k] != '%')
 		{
-			format++;
-			switch (*format)
-				{
-					case 'c':
-						{
-							char_print += _putchar(va_arg(l, int));
-							break;
-						}
-					case 'b':
-						{
-							int k = 0;
-							char *p = va_arg(l, char*);
-					while (p[k])
-					{
-						char_print += _putchar(p[k]);
-						k++;
-								break;
-					}
-							case '%':
-							{
-								char_print += _putchar('%');
-								break;
-							}
-							default:
-							{
-								_putchar(*format);
-									_putchar('%');
-									char_print += 2;
-								break;
-							}
-						}
-				}
+			buffer[B_I++] = format[k];
+
+			if (B_I == BUFF_SIZE)
+				print_buffer(buffer, &B_I);
 		}
 		else
 		{
-			char_print += _putchar(*format);
-		}
-					format++;
-		}
-		va_end(l);
+			print_buffer(buffer, &B_I);
+			flags = get_flag(format, &k);
+			precision = get_precision(format, &k, par);
+			width = get_width(format, &k, par);
+			size = get_size(format, &k);
+			++k;
+			printed = handle_print(format, &k, par, flags, size, width, buffer, precision);
 
-		return (char_print);
+			if (printed == -1)
+				char_print += printed;
+		}
 	}
 
+	print_buffer(buffer, &B_I);
 
+	va_end(par);
+
+	return (char_print);
+}
+/**
+ * print_buffer - function to print buffer content
+ * @buffer: an array of characters
+ * @B_I: the index to add to next character
+ */
+void print_buffer(char buffer, int *buff_ind);
+{
+	if (*B_I > 0)
+		write(1, &buffer[0], *B_I);
+	*B_I = 0;
+}
