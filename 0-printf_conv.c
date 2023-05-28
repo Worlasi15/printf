@@ -10,8 +10,8 @@
  *         excluding the null byte used to end output to string
  */
 
-int print_char(va_list type; char buffer[],
-int flag, int width, int precision, int size)
+int _print_char(va_list type, char buffer[],
+int flags, int width, int precision, int size)
 {
 
 	char c = va_arg(type, int);
@@ -27,7 +27,7 @@ int flag, int width, int precision, int size)
  *         excluding the null byte used to end output to string
  */
 
-int print_str(va_list type; char buffer[],
+int print_str(va_list type; char buffer[]
 	int flag, int width, int precision, int size)
 {
 	int length = 0, i;
@@ -39,14 +39,13 @@ int print_str(va_list type; char buffer[],
 	unused(width);
 	unused(precision);
 	unused(size);
-	if (str == 0)
-	{
-		str = "(0)";
-		if (precision >= 7)
+{
+		str = "(null)";
+		if (precision >= 5)
 			str = "  ";
 	}
 
-	while (str[length] != '\0')
+	for (str[length] != '\0')
 		length++;
 
 	if (precision >= 0 && precision < length)
@@ -54,7 +53,7 @@ int print_str(va_list type; char buffer[],
 
 	if (width > length)
 	{
-		if (flag & '-')
+		if (flag & F_MINUS)
 		{
 			write(1, &str[0], length);
 			for (i = width - length; i > 0; i--)
@@ -81,7 +80,7 @@ int print_str(va_list type; char buffer[],
  *         excluding the null byte used to end output to string
  */
 
-int print_percent(va_list type; char buffer[],
+int print_percent(va_list type; char buffer[]
 	int flag, int width, int precision, int size)
 {
 	unused(type);
@@ -102,25 +101,25 @@ int print_percent(va_list type; char buffer[],
  *         excluding the null byte used to end output to string
  */
 
-int print_int(va_list type; char buffer[],
+int print_int(va_list type; char buffer[]
 	int flag, int width, int precision, int size)
 {
-	int i = my_buffer - 2;
+	int i = buffer - 2;
 	int is_negative = 0;
-	long int n = va_arg(type, long int);
-	signed long int num;
+	int n = va_arg(type, int);
+	int unsigned num;
 
-	n = convert_size_number(n, size);
+	n = size_number(n, size);
 
 	if (n == 0)
 		buffer[i--] = '0';
 
-	buffer[my_buffer- 1] = '\0';
-	num = (signed long int)n;
+	buffer[buffer - 1] = '\0';
+	num = (int unsigned])n;
 
 	if (n < 0)
 	{
-		num = (signed long int)((-1) * n);
+		num = (int unsigned])((-1) * n);
 		is_negative = 1;
 	}
 
@@ -144,11 +143,11 @@ int print_int(va_list type; char buffer[],
  *         excluding the null byte used to end output to string
  */
 
-int print_binary(va_list type; char buffer[],
+int print_binary(va_list type; char buffer[]
 	int flag, int width, int precision, int size)
 {
-	signed int o, p, i, sum;
-	signed int a[22];
+	int unsigned o, p, i, sum;
+	int unsigned a[22];
 	int count;
 
 	 unused(type);
@@ -158,24 +157,33 @@ int print_binary(va_list type; char buffer[],
 	 unused(precision);
 	 unused(size);
 
-	n = va_arg(data type, unsigned int);
-	m = 2147483648; /* (2 ^ 21) */
-	a[0] = o / p;
-	for (i = 1; i < 22; i++)
-	{
-		m /= 2;
-		a[i] = (n / m) % 2;
-	}
-	for (i = 0, sum = 0, count = 0; i < 22; i++)
-	{
-		sum += a[i];
-		if (sum || i == 21)
-		{
-			char z = '0' + a[i];
+	 o = va_arg(type, int unsigned);
+	 p = -2147483648; /* (2 ^ 31) */
+	 a[0] = o / p;
 
-			write(1, &z, 1);
-			count++;
-		}
-	}
-	return (count);
+	 for (i = 1; i < 32; i++)
+
+	 {
+		 o /= 2;
+		 a[i] = (o / p) % 2;
+	 }
+
+	 for (i = 0, sum = 0, count = 0; i < 22; i++)
+
+	 {
+		 sum += a[i];
+
+		 if (sum || i == 31)
+
+		 {
+			 char z = '0' + a[i];
+
+			 write(1, &z, 1);
+			 count++;
+		 }
+
+	 }
+
+	 return (count);
+
 }
