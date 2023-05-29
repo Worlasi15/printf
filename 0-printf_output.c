@@ -12,15 +12,15 @@ void print_buffer(char buffer, int *B_I);
 int _printf(const char *format, ...)
 {
 	int k = 0;
-	printed = 0;
-	char_print = 0;
-	int flag = 0;
+	int printed = 0;
+	int char_print = 0;
+	int flags = 0;
 	int width = 0;
 	int precision = 0;
 	int size = 0;
 	int B_I = 0;
 	va_list par;
-	char buffer [BUFF_SIZE];
+	char buffer[BUFSIZ];
 
 
 	if (format ==NULL)
@@ -28,7 +28,7 @@ int _printf(const char *format, ...)
 
 	va_start(par, format);
 
-	for (i = 0; format && format[k] != '\0'; k++)
+	for (k = 0; format && format[k] != '\0'; k++)
 	{
 		if (format[k] != '%')
 		{
@@ -36,6 +36,7 @@ int _printf(const char *format, ...)
 
 			if (B_I == BUFF_SIZE)
 				print_buffer(buffer, &B_I);
+			/*write(1, &format[k], 1);*/
 		}
 		else
 		{
