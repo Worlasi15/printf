@@ -16,14 +16,14 @@
 
 void print_to_buffer(char *buffer, const char *format, ...)
 {
-
 	va_list par;
-
-	va_start(par, format);
 
 	int remaining_space = BUFFER_SIZE - strlen(buffer) - 1;
 	int chars_written = vsnprintf(buffer + strlen(buffer),
 			remaining_space, format, par);
+
+
+	va_start(par, format);
 
 	va_end(par);
 
