@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdio>
+#include <stdlib.h>
 
 /**
  * _print_conv - display argument based on type

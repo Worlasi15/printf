@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdio>
+#include <stdlib.h>
 
 /**
  * _unsigned_num_print - print an unsigned number
