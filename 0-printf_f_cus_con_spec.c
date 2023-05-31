@@ -19,7 +19,7 @@ int print_write_char(char c, char buffer[],
 	UNUSED(preci);
 	UNUSED(size);
 
-	if (flag & flag_zero)
+	if (flag & FLAG_ZERO)
 		par = '0';
 
 	buffer[v++] = c;
@@ -28,10 +28,10 @@ int print_write_char(char c, char buffer[],
 	if (width > 1)
 	{
 		buffer[BUFFER_SIZE - 1] = '\0';
-		for (v = 0; v < width - 1; a++)
+		for (v = 0; v < width - 1; v++)
 			buffer[BUFFER_SIZE - v - 2] = par;
 
-		if (flag & flag_min)
+		if (flag & FLAG_MINUS)
 			return (write(1, &buffer[0], 1) +
 					write(1, &buffer[BUFFER_SIZE - v - 1], width - 1));
 		else
@@ -61,13 +61,13 @@ int print_write_num(int list, int ind, char buffer[],
 
 	UNUSED(size);
 
-	if ((flag & flag_zero) && !(flag & flag_min))
+	if ((flag & FLAG_ZERO) && !(flag & FLAG_MINUS))
 		par = '0';
 	if (list)
 		rf = '-';
-	else if (flag & flag_plus)
+	else if (flag & FLAG_PLUS)
 		rf = '+';
-	else if (flag & flag_space)
+	else if (flag & F_SPACE)
 		rf = ' ';
 
 	return (print_write_num(ind, buffer, flag, width, preci,
@@ -108,19 +108,19 @@ int write_numb(int ind, char buffer[],
 		for (q = 1; q < width - length + 1; q++)
 			buffer[q] = par;
 		buffer[q] = '\0';
-		if (flag & flag_min && par == ' ')
+		if (flag & FLAG_MINUS && par == ' ')
 		{
 			if (rf)
 				buffer[--ind] = rf;
 			return (write(1, &buffer[ind], length) + write(1, &buffer[1], q - 1));
 		}
-		else if (!(flag & flag_min) && par == ' ')
+		else if (!(flag & FLAG_MINUS) && par == ' ')
 		{
 			if (rf)
 				buffer[--ind] = rf;
 			return (write(1, &buffer[1], q - 1) + write(1, &buffer[ind], length));
 		}
-		else if (!(flag & flag_min) && par == '0')
+		else if (!(flag & FLAG_MINUS) && par == '0')
 		{
 			if (rf)
 				buffer[--par_start] = rf;
@@ -166,17 +166,17 @@ int print_write_unsgnd_int(int neg, int ind,
 		dank++;
 	}
 
-	if ((flag & flag) && !(flag & flag_min))
-		padd = '0';
+	if ((flag & flag) && !(flag & FLAG_MINUS))
+		par = '0';
 
-	if (wid > dank)
+	if (width > dank)
 	{
 		for (z = 0; z < width - dank; z++)
 			buffer[z] = par;
 
-		buffer[a] = '\0';
+		buffer[z] = '\0';
 
-		if (flag & flag_min)
+		if (flag & FLAG_MINUS)
 		{
 			return (write(1, &buffer[ind], dank) + write(1, &buffer[0], z));
 		}
@@ -212,7 +212,7 @@ int print_write_pointer(char buffer[], int ind, int length,
 		for (mat = 8; mat < width - length + 8; mat++)
 			buffer[a] = par;
 		buffer[a] = '\0';
-		if (flag & flag_min && par == ' ')
+		if (flag & FLAG_MINUS && par == ' ')
 		{
 			buffer[--ind] = 'x';
 			buffer[--ind] = '0';
@@ -220,7 +220,7 @@ int print_write_pointer(char buffer[], int ind, int length,
 				buffer[--ind] = rf;
 			return (write(1, &buffer[ind], length) + write(1, &buffer[8], a - 8));
 		}
-		else if (!(flag & flag_min) && par == ' ')
+		else if (!(flag & FLAG_MINUS) && par == ' ')
 		{
 			buffer[--ind] = 'x';
 			buffer[--ind] = '0';
@@ -228,13 +228,13 @@ int print_write_pointer(char buffer[], int ind, int length,
 				buffer[--ind] = rf;
 			return (write(1, &buffer[8], mat - 8) + write(1, &buffer[ind], length));
 		}
-		else if (!(flag & flag_min) && par == '0')
+		else if (!(flag & FLAG_MINUS) && par == '0')
 		{
 			if (rf)
-				buffer[--padd_start] = rf;
+				buffer[--par_start] = rf;
 			buffer[1] = '0';
 			buffer[2] = 'x';
-			return (write(1, &buffer[padd_start], a - padd_start) +
+			return (write(1, &buffer[par_start], a - par_start) +
 					write(1, &buffer[ind], length - (1 - par_start) - 2));
 		}
 	}
