@@ -1,6 +1,7 @@
 #include "main.h"
 
 /**
+<<<<<<< HEAD
  * print_prec - function to get the precision to print
  * @format: a character string
  * @p: List of arguments being printed
@@ -38,5 +39,35 @@ int print_prec(const char *format, int *p, va_list args)
 	*p = worl - 1;
 
 	return (reb);
+=======
+ * _flag_character - active flags
+ * @format: format
+ * @p: take a parameter
+ * Return: flags
+ */
+int _flag_character(const char *format, int *p)
+{
+	int d, curr;
+	int flag = 0;
+	const char FLAG_CHARACTER[] = {'-', '+', '0', '#', ' ', '\0'};
+	const int FLAG_ARRRY[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
+
+	for (curr = *p + 1; format[curr] != '\0'; curr++)
+	{
+		for (d = 0; FLAG_CHARACTER[d] != '\0'; d++)
+			if (format[curr] == FLAG_CHARACTER[d])
+			{
+				flag |= FLG_ARRAY[d];
+				break;
+			}
+
+		if (FLAG_CHARACTER[b] == 0)
+			break;
+	}
+
+	*p = curr - 1;
+
+	return (flag);
+>>>>>>> 352c15f454a15034abf6a7a61f8b47ccad14a811
 }
 
