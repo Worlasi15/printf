@@ -9,7 +9,7 @@
 #define BUFFER_SIZE 1024
 
 /* FLAGS */
-#define flag_minus(1 << 0)
+#define flag_minus (1 << 0)
 #define flag_plus (1 << 1)
 #define flag_zero (1 << 2)
 #define F_HASH (1 << 3)
@@ -26,8 +26,8 @@
  */
 struct frt
 {
-    char frt;
-    int (*fun)(va_list, char[], int, int, int, int);
+	char frt;
+	int (*fun)(va_list, char[], int, int, int, int);
 };
 
 /**
@@ -37,8 +37,8 @@ struct frt
  */
 typedef struct funct
 {
-    char fr_t;
-    int (*funct)(va_list, char[], int, int, int, int);
+	char fr_t;
+	int (*funct)(va_list, char[], int, int, int, int);
 } funct;
 
 int _printf(const char *format, ...);
@@ -50,13 +50,13 @@ int print_dig(char m);
 long int print_num_size_con(long int dig, int size);
 long int print_conv_size(unsigned long int num, int size);
 int print_write_char(char c, char buffer[],
-                     int flag, int width, int preci, int size);
+int flag, int width, int preci, int size);
 int print_write_num(int list, int ind, char buffer[], int flag,
-		int width, int preci, int size);
+int width, int preci, int size);
 int print_write_unsgnd_int(int neg, int ind, char buffer[],
-		int flag, int width, int preci, int size);
+int flag, int width, int preci, int size);
 int print_write_pointer(char buffer[], int ind, int length,
-		int flag, int width, int size);
+int flag, int width, int size);
 int character_print_(va_list type, char buffer[]);
 int _string(va_list t, char buffer[]);
 int precision_per(va_list t, char buffer[]);
