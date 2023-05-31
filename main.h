@@ -57,25 +57,40 @@ int print_write_unsgnd_int(int neg, int ind, char buffer[],
 int flag, int width, int preci, int size);
 int print_write_pointer(char buffer[], int ind, int length,
 int flag, int width, int size);
-int character_print_(va_list type, char buffer[]);
-int _string(va_list t, char buffer[]);
-int precision_per(va_list t, char buffer[]);
-int _print_integer(va_list t, char buffer[]);
-int print_bin_unsigned(va_list t, char buffer[]);
-int _unsigned_num_print(va_list t, char buffer[]);
-int print_oct_notation(va_list t, char buffer[]);
-int print_hexa_lower_case(va_list t, char buffer[]);
-int print_hexa_upper_case(va_list t, char buffer[]);
-int print_hexa_map(va_list t, char map[], char buffer[]);
-int _pointer_(va_list t, char buffer[]);
-int _print_code_(va_list t, char buffer[]);
-int _reverse(va_list t, char buffer[]);
-int _rot_string(va_list t, char buffer[]);
+int _unsigned_num_print(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int print_oct_notation(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int print_hexa_lower_case(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int print_hexa_upper_case(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int print_hexa_map(va_list t, char map[], char buffer[],
+int f, char f_ch, int w, int pr, int s);
+int _print_conv(const char *format, int *i, va_list arguments, char buffer[],
+int f, int w, int pr, int s);
+int print_prec(const char *format, int *p, va_list args);
+int _flag_character(const char *format, int *p);
 void print_buffer(char buffer[], int *buff_ind);
 int _printf_main(const char *format, ...);
 void buffer_statement(char buffer[], int *buff_index);
-int _flag_character(const char *format, int *p);
-int _print_conv(const char *format, int *i, va_list arguments, char buffer[]);
+int character_print_(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int _string(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int precision_per(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int _print_integer(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int print_bin_unsigned(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int pointer(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int print_code(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int _reverse(va_list t, char buffer[],
+int f, int w, int pr, int s);
+int _rot_string(va_list t, char buffer[],
+int f, int w, int pr, int s);
 
 #endif
-
