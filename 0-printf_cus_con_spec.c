@@ -13,7 +13,7 @@ int print_prec(const char *format, int *p, va_list args)
 	int worl = *p + 1;
 	int reb = -1;
 
-	if (format[Worl] != '.')
+	if (format[worl] != '.')
 		return (reb);
 
 	reb = 0;
@@ -37,30 +37,30 @@ int print_prec(const char *format, int *p, va_list args)
 
 	*p = worl - 1;
 
-	return (reb)
+	return (reb);
 /**
- * _flag_character - active flags
+ * _flag_character - flag array,minus,plus,zero,hash,space
  * @format: format
  * @p: take a parameter
- * Return: flags
+ * Return: active flags
  */
 int _flag_character(const char *format, int *p)
 {
 	int d, curr;
 	int flag = 0;
 	const char FLAG_CHARACTER[] = {'-', '+', '0', '#', ' ', '\0'};
-	const int FLAG_ARRRY[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
+	const int F_ARRAY[] = {FLAG_MINUS, FLAG_PLUS, FLAG_ZERO, F_HASH, F_SPACE, 0};
 
 	for (curr = *p + 1; format[curr] != '\0'; curr++)
 	{
 		for (d = 0; FLAG_CHARACTER[d] != '\0'; d++)
 			if (format[curr] == FLAG_CHARACTER[d])
 			{
-				flag |= FLG_ARRAY[d];
+				flag |= F_ARRAY[d];
 				break;
 			}
 
-		if (FLAG_CHARACTER[b] == 0)
+		if (FLAG_CHARACTER[d] == 0)
 			break;
 	}
 

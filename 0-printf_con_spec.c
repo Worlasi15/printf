@@ -15,37 +15,38 @@
 int _print_conv(const char *format, int *i, va_list arguments, char buffer[],
 	int f, int w, int pr, int s)
 {
-	int o, my_len = 0, chars_displayed = -1;
-	funct format_type[] = {
-		{'c', print_char}, {'s', print_str}, {'%', print_per},
-		{'i', print_int}, {'d', print_int}, {'b', print_bin},
-		{'u', print_unsgnd}, {'o', print_oct}, {'x', print_hexadec},
-		{'X', print_hexa_upp}, {'p', print_point}, {'S', print_non_printable},
-		{'r', print_rev}, {'R', print_rot13str}, {'\0', NULL}
-	}
-	for (o = 0; format_type[o].format != '\0'; o++)
-		if (format[*i] == format_type[o].format)
-			return (format_type[o].function(arguments, buffer, format, w, pr, s));
+	int j, u_len = 0, chars_displayed = -1;
 
-	if (format_type[o].fr_t == '\0')
+        funct format_t[] = {
+
+		{'c', print_char}, {'s', print_dig}, {'%', print_prec},
+		{'i', print_dig}, {'d', print_dig}, {'b', print_dig},
+		{'u', print_bin_unsigned}, {'o', print_code}, {'x', print_hexa_map},
+		{'X', print_hexa_map}, {'p', print_point}, {'S',_non_printable},
+		{'r', print_prec}, {'R', _rot_string}, {'\0', NULL}
+	};
+	for (j = 0; format_t[j]; != '\0'; j++)
+		if (char == funct[j]format_t)
+			return (format_t[j].funct(arguments, buffer, f, w, pr, s));
+
+	if (format_t[j].fr_t == '\0')
 	{
 		if (format[*i] == '\0')
 			return (-1);
-
-		my_len += write(1, "%%", 1);
+		u_len += write(1, "%%", 1);
 		if (format[*i - 1] == ' ')
-			my_len += write(1, " ", 1);
+			u_len += write(1, " ", 1);
 		else if (w)
 		{
 			--(*i);
-			while (format[*i] != ' ' && format[*i] = '%')
+			while (format[*i] != ' ' && format[*i] != '%')
 				--(*i);
 			if (format[*i] == ' ')
 				--(*i);
 			return (1);
 		}
-		my_len += write(1, &format[*i], 1);
-		return (my_len);
+		u_len += write(1, &format[*i], 1);
+		return (u_len);
 	}
-	return (chars_dsplyd);
+	return (chars_displayed);
 }

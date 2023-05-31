@@ -15,7 +15,7 @@ int character_print_(va_list t, char buffer[],
 {
 	char o = va_arg(t, int);
 
-	return (write_char(o, buffer, f, w, pr, s));
+	return (print_char(o, buffer, f, w, pr, s));
 }
 /**
  * _string - printed display string
@@ -31,7 +31,7 @@ int _string(va_list t, char buffer[],
 		int f, int w, int pr, int s)
 {
 	int len = 0, i;
-	char *fr = va_arg(typ, char *);
+	char *fr = va_arg(t, char *);
 
 	UNUSED(buffer);
 	UNUSED(f);
@@ -41,15 +41,15 @@ int _string(va_list t, char buffer[],
 	if (fr == NULL)
 	{
 		fr = "(null)";
-		if (ps >= 6)
+		if (s >= 6)
 			fr = "      ";
 	}
 
 	while (fr[len] != '\0')
 		len++;
 
-	if (ps >= 0 && ps < len)
-		len = ps;
+	if (s >= 0 && s < len)
+		len = s;
 
 	if (w > len)
 	{
@@ -65,11 +65,11 @@ int _string(va_list t, char buffer[],
 			for (i = w - len; i > 0; i--)
 				write(1, " ", 1);
 			write(1, &fr[0], len);
-			return (wid);
+			return (w);
 		}
 	}
 
-	return (write(1, st, len));
+	return (write(1, s, len));
 }
 
 /**
@@ -108,10 +108,10 @@ int _print_integer(va_list t, char buffer[],
 {
 	int i = BUFFER_SIZE - 2;
 	int is_negative = 0;
-	long int n = va_arg(typ, long int);
+	long int n = va_arg(t, long int);
 	unsigned long int num;
 
-	n = conv_size_num(n, size);
+	n = conv_size_num(n, s);
 
 	if (n == 0)
 		buffer[i--] = '0';
@@ -132,7 +132,7 @@ int _print_integer(va_list t, char buffer[],
 	}
 
 	i++;
-	return (write_num(is_neative, i, buffer, f, w, pr, s));
+	return (write_num(is_negative, i, buffer, f, w, pr, s));
 
 }
 
@@ -159,7 +159,7 @@ int print_bin_unsigned(va_list t, char buffer[],
 	UNUSED(pr);
 	UNUSED(s);
 
-	r = va_arg(typ, unsigned int);
+	r = va_arg(t, unsigned int);
 	k = 2147483648; /* (2 ^ 31) */
 	i[0] = r / k;
 	for (a = 1; a < 32; a++)

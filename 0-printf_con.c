@@ -16,7 +16,7 @@ int _unsigned_num_print(va_list t, char buffer[],
 	int x = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(t, unsigned long int);
 
-	num = convert_size_unsgnd(num, size);
+	num = convert_size_unsigned(num, s);
 
 	if (num == 0)
 		buffer[x--] = '0';
@@ -29,8 +29,8 @@ int _unsigned_num_print(va_list t, char buffer[],
 		num /= 10;
 	}
 
-	a++;
-	return (write_unsgnd(0, x, buffer, f, w, pr, s));
+	x++;
+	return (write_unsigned(0, x, buffer, f, w, pr, s));
 }
 
 /**
@@ -48,7 +48,7 @@ int print_oct_notation(va_list t, char buffer[],
 {
 
 	int c = BUFFER_SIZE - 2;
-	unsigned long int num = va_arg(typ, unsigned long int);
+	unsigned long int num = va_arg(t, unsigned long int);
 	unsigned long int init_num = num;
 
 	UNUSED(w);
@@ -70,7 +70,7 @@ int print_oct_notation(va_list t, char buffer[],
 		buffer[c--] = '0';
 
 	c++;
-	return (write_unsgnd(0, a, buffer, f, w, pr, s));
+	return (write_unsgnd(0, c, buffer, f, w, pr, s));
 }
 
 /**
@@ -86,7 +86,7 @@ int print_oct_notation(va_list t, char buffer[],
 int print_hexa_lower_case(va_list t, char buffer[],
 		int f, int w, int pr, int s)
 {
-	return (print_hexadecimal(t, "0123456789abcdef", buffer,
+	return (print_hexa_map(t, "0123456789abcdef", buffer,
 				f, 'x', w, pr, s));
 }
 
@@ -103,7 +103,7 @@ int print_hexa_lower_case(va_list t, char buffer[],
 int print_hexa_upper_case(va_list t, char buffer[],
 		int f, int w, int pr, int s)
 {
-	return (print_hexadecimal(t, "0123456789ABCDEF", buffer,
+	return (print_hexa_map(t, "0123456789ABCDEF", buffer,
 				f, 'X', w, pr, s));
 }
 
@@ -123,7 +123,7 @@ int print_hexa_map(va_list t, char map[], char buffer[],
 		int f, char f_ch, int w, int pr, int s)
 {
 	int c = BUFFER_SIZE - 2;
-	unsigned long int num = va_arg(typ, unsigned long int);
+	unsigned long int num = va_arg(t, unsigned long int);
 	unsigned long int init_num = num;
 
 	UNUSED(w);
@@ -131,13 +131,13 @@ int print_hexa_map(va_list t, char map[], char buffer[],
 	num = convert_size_unsgnd(num, s);
 
 	if (num == 0)
-		buffer[g--] = '0';
+		buffer[c--] = '0';
 
 	buffer[BUFFER_SIZE - 1] = '\0';
 
 	while (num > 0)
 	{
-		buffer[g--] = map[num % 16];
+		buffer[c--] = map[num % 16];
 		num /= 16;
 	}
 
@@ -148,5 +148,5 @@ int print_hexa_map(va_list t, char map[], char buffer[],
 	}
 
 	c++;
-	return (write_unsignd(0, g, buffer, f, w, pr, s));
+	return (write_unsgnd(0, c, buffer, f, w, pr, s));
 }

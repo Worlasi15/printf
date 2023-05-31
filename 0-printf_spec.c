@@ -80,7 +80,7 @@ int _print_code_(va_list t, char buffer[],
 		if (is_print(str[v]))
 			buffer[v + offset] = str[v];
 		else
-			offset += append_hexadecimal_code(str[v], buffer, v + offset);
+			offset += append_hexa_code(str[v], buffer, v + offset);
 
 		v++;
 	}
@@ -120,7 +120,7 @@ int _reverse(va_list t, char buffer[],
 
 		string = ("Null");
 	}
-	for (u = 0; st[u]; u++)
+	for (u = 0; s[u]; u++)
 		;
 
 	for (u = u - 1; u >= 0; u--)
@@ -140,11 +140,11 @@ int _reverse(va_list t, char buffer[],
  * @f: active flags
  * @w: width
  * @pr: precision spec
- * @s: size
+ * @size: size
  * Return: numbers of characters displayed
  */
 int _rot_string(va_list t, char buffer[],
-		int f, int w, int pr, int s)
+		int f, int w, int pr, int size)
 {
 	char m;
 	char *str;

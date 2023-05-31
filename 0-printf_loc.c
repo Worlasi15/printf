@@ -5,6 +5,7 @@ void print_buffer(char buffer[], int *buff_ind);
 /**
  * _printf_main - Printf function
  * @format: format
+ * @a: character
  * Return: print characters.
  */
 int _printf_main(const char *format, ...)
@@ -19,28 +20,28 @@ int _printf_main(const char *format, ...)
 
 	va_start(arguments, format);
 
-	for (a = 0; format && format[z] != '\0'; z++)
+	for (ta = 0; format && format[ta] != '\0'; ta++)
 	{
-		if (format[z] != '%')
+		if (format[ta] != '%')
 		{
-			buffer[buff_index++] = format[z];
+			buffer[buff_index++] = format[ta];
 			if (buff_index == BUFFER_SIZE)
 				print_buffer(buffer, &buff_index);
-			chars_dsplyd++;
+			characters_display++;
 		}
 		else
 		{
 			print_buffer(buffer, &buff_index);
-			f = hand_f(format, &z);
-			w = hand_w(format, &z, arguments);
-			pr = hand_pr(format, &z, arguments);
-			size = hand_size(format, &z);
-			++z;
-			dsplyd = handle_print(format, &z, arguments, buffer,
+			f = hand_f(format, &ta);
+			w = hand_w(format, &ta, arguments);
+			pr = hand_pr(format, &ta, arguments);
+			s = hand_size(format, &ta);
+			++ta;
+			display = handle_print(format, &ta, arguments, buffer,
 					f, w, pr, s);
-			if (dsplyd == -1)
+			if (display == -1)
 				return (-1);
-			chars_dsplyd += dsplyd;
+			characters_display += display;
 		}
 	}
 
@@ -48,7 +49,7 @@ int _printf_main(const char *format, ...)
 
 	va_end(arguments);
 
-	return (chars_dsplyd);
+	return (characters_display);
 }
 
 /**
