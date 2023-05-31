@@ -1,42 +1,42 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * flag_characters - characters for non-custom conversion specifiers
- * @format: format string to print
- * @i: Current index in the format string
+ * print_prec - function to get the precision to print
+ * @format: a character string
+ * @p: List of arguments being printed
+ * @args: list of arguments
  *
- * Return: Active flags characters
+ * Return: Precision.
  */
-int flag_characters(const char *format, int *i)
+int print_prec(const char *format, int *p, va_list args)
 {
-	const char flags_ch[] = {'-', '+', '0', '#', ' ', '\0'};
-	const int flags_arr[] = {f("-"), f("+"), f(0), f("#"), f(" "), 0};
+	int worl = *p + 1;
+	int reb = -1;
 
-	int flags = 0;
-	int curr_i = *i + 1;
-	int k;
+	if (format[Worl] != '.')
+		return (reb);
 
-	while (format[curr_i] != '\0')
+	reb = 0;
+
+	for (worl += 1; format[worl] != '\0'; worl++)
 	{
-		for (k = 0; flags_ch[k] != '\0'; k++)
+		if (is_dig(format[worl]))
 		{
-			if (format[curr_i] == flags_ch[k])
-			{
-				flags |= flags_arr[k];
-				break;
-			}
+			reb *= 10;
+			reb += format[worl] - '0';
 		}
-
-		if (flags_ch[k] == '\0')
+		else if (format[worl] == '*')
 		{
+			worl++;
+			reb = va_arg(args, int);
 			break;
 		}
-
-		curr_i++;
+		else
+			break;
 	}
 
-	*i = curr_i - 1;
+	*p = worl - 1;
 
-	return (flags);
+	return (reb);
 }
+
