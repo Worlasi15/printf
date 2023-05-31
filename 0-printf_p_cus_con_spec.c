@@ -8,7 +8,7 @@
  */
 int print_char(char k)
 {
-	if (a >= 32 && a < 127)
+	if (k >= 32 && k < 127)
 		return (1);
 
 	return (0);
@@ -28,11 +28,11 @@ int print_append_hexa(char ascii, char buffer[], int l)
 	if (ascii < 0)
 		ascii *= -1;
 
-	buffer[x++] = '\\';
-	buffer[x++] = 'l';
+	buffer[l++] = '\\';
+	buffer[l++] = 'l';
 
-	buffer[x++] = map[ascii / 16];
-	buffer[x] = map[ascii % 16];
+	buffer[l++] = map[ascii / 16];
+	buffer[l] = map[ascii % 16];
 
 	return (3);
 }
@@ -45,7 +45,7 @@ int print_append_hexa(char ascii, char buffer[], int l)
  */
 int print_dig(char m)
 {
-	if (a >= '0' && a <= '9')
+	if (m >= '0' && m <= '9')
 		return (1);
 
 	return (0);
@@ -77,9 +77,9 @@ long int print_num_size_con(long int dig, int size)
  */
 long int print_conv_size(unsigned long int numeral, int size)
 {
-	if (size == long_numeral)
+	if (size == long_num)
 		return (numeral);
-	else if (size == short_numeral)
+	else if (size == short_num)
 		return ((unsigned short)numeral);
 
 	return ((unsigned int)numeral);
