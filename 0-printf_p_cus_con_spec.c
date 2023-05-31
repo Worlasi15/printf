@@ -54,15 +54,15 @@ int print_dig(char m)
 /**
  * print_num_size_con - the specified size of a number is casted
  * @dig: number that was inputted
- * @size: Number indicating the type to be casted.
+ * @s: Number indicating the type to be casted.
  *
  * Return: casted value of dig
  */
-long int print_num_size_con(long int dig, int size)
+long int print_num_size_con(long int dig, int s)
 {
-	if (size == long_num)
+	if (s == long_num)
 		return (dig);
-	else if (size == short_num)
+	else if (s == short_num)
 		return ((short)dig);
 
 	return ((int)dig);
@@ -70,18 +70,18 @@ long int print_num_size_con(long int dig, int size)
 
 /**
  * print_conv_size - function that casts a number to the specified size
- * @numeral: the number to be casted
- * @size: Number indicating the type to be casted
+ * @num: the number to be casted
+ * @s: Number indicating the type to be casted
  *
  * Return: casted value of numeral
  */
-long int print_conv_size(unsigned long int numeral, int size)
+long int print_conv_size(unsigned long int num, int s)
 {
-	if (size == long_num)
-		return (numeral);
-	else if (size == short_num)
-		return ((unsigned short)numeral);
+	if (s == long_num)
+		return (num);
+	else if (s == short_num)
+		return ((unsigned short)num);
 
-	return ((unsigned int)numeral);
+	return ((unsigned int)num);
 }
 
