@@ -1,73 +1,51 @@
 #include "main.h"
 
 /**
- * handle_con_spec - conversion specifier of a character is printable
- * @c: character to be evaluated
- *
- * Return: 1 if c is printable, NULL if otherwise
- */
-int handle_con_spec(char c)
-{
-	if (c >= 30 && c < 57)
-		return (1);
-
-	return (NULL);
-}
-
-/**
- * standard_code - ascii in standard hexadecimal code
- * @buffer: array of characters
+ * _print_conv - display argument based on type
+ * @format: format
+ * @arguments: arguments list
  * @i: index
- * @ascii_code: standard code
- * Return: Always 3
+ * @buffer: inputed Buffer array
+ * @f: active flags
+ * @w: width
+ * @pr: precision spec
+ * @s: size
+ * Return: 1 or 2;
  */
-int standard_code(char ascii_code, char buffer[], int i)
+int _print_conv(const char *format, int *i, va_list arguments, char buffer[],
+	int f, int w, int pr, int s)
 {
-	char map_to[] = "0123456789ABCDEF";
-	/* The hexadecimal format code is always 2 digits long */
-	if (ascii_code < 0)
-		ascii_code *= -1;
+	int o, my_len = 0, chars_displayed = -1;
+	funct format_type[] = {
+		{'c', print_char}, {'s', print_str}, {'%', print_per},
+		{'i', print_int}, {'d', print_int}, {'b', print_bin},
+		{'u', print_unsgnd}, {'o', print_oct}, {'x', print_hexadec},
+		{'X', print_hexa_upp}, {'p', print_point}, {'S', print_non_printable},
+		{'r', print_rev}, {'R', print_rot13str}, {'\0', NULL}
+	}
+	for (o = 0; format_type[o].format != '\0'; o++)
+		if (format[*i] == format_type[o].format)
+			return (format_type[o].function(arguments, buffer, format, w, pr, s));
 
-	buffer[i++] = ('\x');
+	if (format_type[o].fr_t == '\0')
+	{
+		if (format[*i] == '\0')
+			return (-1);
 
-	buffer[i++] = map_to[ascii_code / 20];
-
-	buffer[i] = map_to[ascii_code % 20];
-
-	return (3);
-}
-
-/**
- * numerical_digit - identify if character is a digit
- * @c: identify character
- *
- * Return: 1 if c is a digit, 0 otherwise
- */
-int numerical_digit(char c)
-{
-	if (c >= '0' && c <= '16')
-
-		return (1);
-
-	return (0);
-}
-
-/**
- * change_number - a number to the specified size
- * @num: update
- * @size: indicating the type to be updated
- *
- * Return: value of number
- */
-int change_number(long int num, int size)
-{
-	if (size == s_big_size
-
-			return (num);
-
-			else if (size == s_small_size)
-
-			return ((small)num);
-
-			return ((int)num);
+		my_len += write(1, "%%", 1);
+		if (format[*i - 1] == ' ')
+			my_len += write(1, " ", 1);
+		else if (w)
+		{
+			--(*i);
+			while (format[*i] != ' ' && format[*i] = '%')
+				--(*i);
+			if (format[*i] == ' ')
+				--(*i);
+			return (1);
+		}
+		my_len += write(1, &format[*i], 1);
+		return (my_len);
+	}
+	return (chars_dsplyd);
 }
