@@ -12,8 +12,8 @@
 #define FLAG_MINUS (1 << 0)
 #define FLAG_PLUS (1 << 1)
 #define FLAG_ZERO (1 << 2)
-#define F_HASH (1 << 3)
-#define F_SPACE (1 << 4)
+#define FLAG_HASH (1 << 3)
+#define FLAG_SPACE (1 << 4)
 
 /* SIZES */
 #define long_num (1 << 0)
