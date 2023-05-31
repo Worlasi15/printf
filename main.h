@@ -9,9 +9,9 @@
 #define BUFFER_SIZE 1024
 
 /* FLAGS */
-#define flag_minus (1 << 0)
-#define flag_plus (1 << 1)
-#define flag_zero (1 << 2)
+#define FLAG_MINUS (1 << 0)
+#define FLAG_PLUS (1 << 1)
+#define FLAG_ZERO (1 << 2)
 #define F_HASH (1 << 3)
 #define F_SPACE (1 << 4)
 
@@ -41,6 +41,7 @@ typedef struct funct
 	int (*funct)(va_list, char[], int, int, int, int);
 } funct;
 
+/** prtotypes */
 int _printf(const char *format, ...);
 int print_prec(const char *format, int *p, va_list args);
 int print_size(const char *format, int *p);
