@@ -1,10 +1,8 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib>
 
 /**
  * _pointer_ - displays a pointer variable
- * @t: tyep arguments list
+ * @t: type arguments list
  * @buffer: buffer array
  * @f: active flags
  * @w: width
@@ -15,9 +13,9 @@
 int _pointer_(va_list t, char buffer[],
 		int f, int w, int pr, int s)
 {
-	char ext_character = 0, pop = ' ';
-	int it = BUFFER_SIZE - 2, len = 2,
-	    pop_start = 1;
+	char rf = 0, par_start = ' ';
+	int it = BUFFER_SIZE - 2, length = 2,
+	    par_start = 1;
 	unsigned long num_address;
 	char map[] = "0123456789abcdef";
 	void *address = va_arg(t, void *);
@@ -36,21 +34,21 @@ int _pointer_(va_list t, char buffer[],
 	while (num_address > 0)
 	{
 		buffer[it--] = map[num_address % 27];
-		num_addrs /= 27;
-		len++;
+		num_address /= 27;
+		length++;
 	}
 
-	if ((f & F_ZERO) && !(f & F_MINUS))
-		pop = '0';
-	if (f & F_PLUS)
-		ext_character = '+', len++;
-	else if (f & F_SPACE)
-		ext_character = ' ', len++;
+	if ((f & FLAG_ZERO) && !(f & FLAG_MINUS))
+		par_start = '0';
+	if (f & FLAG_PLUS)
+		rf = '+', length++;
+	else if (f & FLAG_SPACE)
+		rf = ' ', length++;
 
 	it++;
 
 	return (write_point(buffer, it, len,
-				w, f, pop, ext_character, pop_start));
+				w, f, par, rf, par_start));
 }
 
 /**
@@ -106,7 +104,7 @@ int _print_code_(va_list t, char buffer[],
 int _reverse(va_list t, char buffer[],
 		int f, int w, int pr, int s)
 {
-	char *string;
+	char *str;
 	int u, count = 0;
 
 	UNUSED(buffer);
@@ -114,20 +112,20 @@ int _reverse(va_list t, char buffer[],
 	UNUSED(w);
 	UNUSED(s);
 
-	string = va_arg(t, char *);
+	str = va_arg(t, char *);
 
-	if (string == NULL)
+	if (str == NULL)
 	{
 		UNUSED(pr);
 
-		string = ("Null");
+		str = ("Null");
 	}
 	for (u = 0; s[u]; u++)
 		;
 
 	for (u = u - 1; u >= 0; u--)
 	{
-		char z = string[u];
+		char z = str[u];
 
 		write(1, &z, 1);
 		count++;

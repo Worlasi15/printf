@@ -1,13 +1,11 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * character_print_ - printed display character
  * @t: type arguments list
  * @buffer: buffer array print
  * @f: active flags
- * @w: active width
+ * @w: width
  * @pr: precision spec
  * @s: size specifier
  * Return: number of characters displayed

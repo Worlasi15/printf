@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdio>
-#include <stdlib.h>
 
 /**
  * _unsigned_num_print - print an unsigned number
@@ -18,7 +16,7 @@ int _unsigned_num_print(va_list t, char buffer[],
 	int x = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(t, unsigned long int);
 
-	num = convert_size_unsgnd(num, size);
+	num = convert_size_unsigned(num, size);
 
 	if (num == 0)
 		buffer[x--] = '0';
@@ -55,7 +53,7 @@ int print_oct_notation(va_list t, char buffer[],
 
 	UNUSED(w);
 
-	num = convert_size_unsgnd(num, s);
+	num = convert_size_unsigned(num, s);
 
 	if (num == 0)
 		buffer[c--] = '0';
@@ -68,17 +66,17 @@ int print_oct_notation(va_list t, char buffer[],
 		num /= 8;
 	}
 
-	if (f & F_HASH && init_num != 0)
+	if (f & FLAG_HASH && init_num != 0)
 		buffer[c--] = '0';
 
 	c++;
-	return (write_unsgnd(0, c, buffer, f, w, pr, s));
+	return (write_unsigned(0, c, buffer, f, w, pr, s));
 }
 
 /**
  * print_hexa_lower_case - prints unsigned number in hexadecimal
  * @t: type arguments list
- * @buffer: buffer array to handle print
+ * @buffer: buffer array
  * @f: active flags
  * @w: width
  * @pr: precision spec
@@ -130,7 +128,7 @@ int print_hexa_map(va_list t, char map[], char buffer[],
 
 	UNUSED(w);
 
-	num = convert_size_unsgnd(num, s);
+	num = convert_size_unsigned(num, s);
 
 	if (num == 0)
 		buffer[c--] = '0';
@@ -143,7 +141,7 @@ int print_hexa_map(va_list t, char map[], char buffer[],
 		num /= 16;
 	}
 
-	if (f & F_HASH && init_num != 0)
+	if (f & FLAG_HASH && init_num != 0)
 	{
 		buffer[c--] = f_ch;
 		buffer[c--] = '0';

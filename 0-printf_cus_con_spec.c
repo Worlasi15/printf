@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * print_prec - function to get the precision to print
@@ -51,14 +49,14 @@ int _flag_character(const char *format, int *p)
 	int d, curr;
 	int flag = 0;
 	const char FLAG_CHARACTER[] = {'-', '+', '0', '#', ' ', '\0'};
-	const int F_ARRAY[] = {FLAG_MINUS, FLAG_PLUS, FLAG_ZERO, F_HASH, F_SPACE, 0};
+	const int FLAG_ARRAY[] = {FLAG_MINUS, FLAG_PLUS, FLAG_ZERO, F_HASH, F_SPACE, 0};
 
 	for (curr = *p + 1; format[curr] != '\0'; curr++)
 	{
 		for (d = 0; FLAG_CHARACTER[d] != '\0'; d++)
 			if (format[curr] == FLAG_CHARACTER[d])
 			{
-				flag |= F_ARRAY[d];
+				flag |= FLAG_ARRAY[d];
 				break;
 			}
 
